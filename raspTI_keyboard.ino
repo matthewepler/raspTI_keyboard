@@ -345,21 +345,52 @@ void loop(){
   wire13.update();
   wire12.update();  
   
+  // ----------------------- ;
   if(wire8.risingEdge()){
+   if(shft == true){
+    Keyboard.print(':'); 
+   } else {
    Keyboard.print(';'); 
+   }
   }
+  
+  // ----------------------- H
   if(wire9.risingEdge()){
+   if(shft == true){
+    Keyboard.print('H'); 
+   } else {
    Keyboard.print('h'); 
+   }
   }
+  
+  // ----------------------- J
   if(wire15.risingEdge()){
+   if(shft == true){
+    Keyboard.print('J'); 
+   } else {
    Keyboard.print('j'); 
+   }
   }
+  
+  // ----------------------- K
   if(wire14.risingEdge()){
+   if(shft == true){
+    Keyboard.print('K'); 
+   } else {
    Keyboard.print('k'); 
+   }
   }
+  
+  // ----------------------- L
   if(wire13.risingEdge()){
+   if(shft == true){
+    Keyboard.print('L'); 
+   } else {
    Keyboard.print('l'); 
+   }
   }
+  
+  // ----------------------- SPACE
   if(wire12.risingEdge()){
    Keyboard.print(' '); 
   }  
