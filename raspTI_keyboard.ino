@@ -179,20 +179,54 @@ void loop(){
   wire14.update();
   wire13.update();
   
+  // ----------------------- 0
   if(wire8.risingEdge()){
+   if(shft == true){
+     Keyboard.print(')'); 
+     shft = false;
+   } else {
    Keyboard.print('0'); 
+   } 
   }
+  
+  // ----------------------- 6
   if(wire9.risingEdge()){
+   if(shft == true){
+     Keyboard.print('^'); 
+     shft = false;
+   } else {
    Keyboard.print('6'); 
+   }
   }
+  
+  // ----------------------- 7
   if(wire15.risingEdge()){
+   if(shft == true){
+     Keyboard.print('&'); 
+     shft = false;
+   } else {
    Keyboard.print('7'); 
+   }
   }
+  
+  // ----------------------- 8
   if(wire14.risingEdge()){
+   if(shft == true){
+     Keyboard.print('*'); 
+     shft = false;
+   } else {
    Keyboard.print('8'); 
+   }
   }
+  
+  // ----------------------- 9
   if(wire13.risingEdge()){
+   if(shft == true){
+     Keyboard.print('('); 
+     shft = false;
+   } else {
    Keyboard.print('9'); 
+   }
   } 
   digitalWrite(11, LOW);
 
