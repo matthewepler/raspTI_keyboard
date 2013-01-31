@@ -93,8 +93,19 @@ void loop(){
   }
   
   if(wire9.risingEdge()){
+   if(lock == true){ 
+    Keyboard.print('Y'); 
+    lock = false;
+   } 
+   else if(shft == true){
+     Keyboard.print('Y'); 
+     shft = false;
+   }
+   else {
    Keyboard.print('y'); 
+   }
   }
+  
   if(wire15.risingEdge()){
    Keyboard.print('u'); 
   }
@@ -327,6 +338,9 @@ void checkModifiers(){
   if(wire12.risingEdge()){
    shft = true; 
   }
+  if(wire12.fallingEdge()){
+   shft = false; 
+  }
   digitalWrite(12, LOW);
   
   // Wire 7 @ PIN 16: fctn & lock
@@ -336,8 +350,14 @@ void checkModifiers(){
   if(wire12.risingEdge()){
    fctn = true; 
   }  
+  if(wire12.fallingEdge()){
+   fctn = false; 
+  }
   if(wire6.risingEdge()){
    lock = true; 
+  }
+  if(wire6.fallingEdge()){
+   lock = false; 
   }
   digitalWrite(16, LOW);
  
@@ -347,6 +367,9 @@ void checkModifiers(){
   wire12.update();
   if(wire12.risingEdge()){
    ctrl = true; 
+  }
+  if(wire12.fallingEdge()){
+   ctrl = false; 
   }
   digitalWrite(44, LOW);
 }
