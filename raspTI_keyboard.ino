@@ -36,6 +36,7 @@ Bounce wire15 = Bounce(39, 90);
 boolean fctn;
 boolean shft;
 boolean ctrl;
+boolean lock;
 
 
 void setup(){
@@ -62,10 +63,11 @@ void loop(){
   // Check all INPUT pins (column in matrix diagram abobve) for a signal.
   // If a signal is detected, write the character (@ the intersection of the row/column).
 
+  checkModifiers();
+  
   // ------------------------ Wire 1 @ PIN 10
   digitalWrite(10, HIGH); 
   
-  wire6.update();
   wire8.update();
   wire9.update();
   wire15.update();
@@ -74,8 +76,22 @@ void loop(){
   wire12.update(); 
   
   if(wire8.risingEdge()){
+   if(lock == true){ 
+    Keyboard.print('P'); 
+    lock = false;
+   } 
+   else if(shft == true){
+     Keyboard.print('P'); 
+     shft = false;
+   }
+   else if(ctrl == true) {
+     Keyboard.print('"');
+     ctrl = false;
+   } else {
    Keyboard.print('p'); 
+   } 
   }
+  
   if(wire9.risingEdge()){
    Keyboard.print('y'); 
   }
@@ -91,9 +107,8 @@ void loop(){
   if(wire12.risingEdge()){
    Keyboard.print('\n'); 
   }  
-  
   digitalWrite(10, LOW);
-
+  
 
   // ------------------------ Wire 2 @ PIN 11
   digitalWrite(11, HIGH); 
@@ -133,7 +148,6 @@ void loop(){
   wire15.update();
   wire14.update();
   wire13.update();
-  wire12.update();  
   
   if(wire8.risingEdge()){
    Keyboard.print('a'); 
@@ -150,9 +164,6 @@ void loop(){
   if(wire13.risingEdge()){
    Keyboard.print('s'); 
   }
-  if(wire12.risingEdge()){
-   Keyboard.print("SHIFT"); 
-  }  
   
   digitalWrite(12, LOW);
   
@@ -160,7 +171,6 @@ void loop(){
   // ------------------------ Wire 4 @ PIN 13
   digitalWrite(13, HIGH); 
   
-  wire6.update();
   wire8.update();
   wire9.update();
   wire15.update();
@@ -193,7 +203,6 @@ void loop(){
   // ------------------------ Wire 5 @ PIN 14
   digitalWrite(14, HIGH); 
   
-  wire6.update();
   wire8.update();
   wire9.update();
   wire15.update();
@@ -226,17 +235,12 @@ void loop(){
   // ------------------------ Wire 7 @ PIN 16
   digitalWrite(16, HIGH); 
   
-  wire6.update();
   wire8.update();
   wire9.update();
   wire15.update();
   wire14.update();
   wire13.update();
-  wire12.update();
-  
-  if(wire6.risingEdge()){
-   Keyboard.print("CAPS"); 
-  }
+
   if(wire8.risingEdge()){
    Keyboard.print('1'); 
   }
@@ -252,23 +256,18 @@ void loop(){
   if(wire13.risingEdge()){
    Keyboard.print('2'); 
   }  
-  if(wire12.risingEdge()){
-   Keyboard.print("FCTN"); 
-  }
-    
+
   digitalWrite(16, LOW);
 
   
   // ------------------------ Wire 10 @ PIN 44
   digitalWrite(44, HIGH); 
   
-  wire6.update();
   wire8.update();
   wire9.update();
   wire15.update();
   wire14.update();
   wire13.update();
-  wire12.update();  
   
   if(wire8.risingEdge()){
    Keyboard.print('q'); 
@@ -285,9 +284,6 @@ void loop(){
   if(wire13.risingEdge()){
    Keyboard.print('w'); 
   } 
-  if(wire12.risingEdge()){
-   Keyboard.print("CTRL"); 
-  }  
   
   digitalWrite(44, LOW);
  
@@ -295,7 +291,6 @@ void loop(){
   // ------------------------ Wire 11 @ PIN 43
   digitalWrite(43, HIGH); 
 
-  wire6.update();
   wire8.update();
   wire9.update();
   wire15.update();
@@ -317,11 +312,43 @@ void loop(){
   if(wire13.risingEdge()){
    Keyboard.print('x'); 
   } 
-  x
-  digitalWrite(43, LOW);
 
-}  
+  digitalWrite(43, LOW);
   
+}
+
+
+//------------------------  MODIFIER KEYS: fctn, ctrl, shft, lock
+void checkModifiers(){ 
   
+    // Wire 3 @ PIN 12: shft
+  digitalWrite(12, HIGH);
+  wire12.update();
+  if(wire12.risingEdge()){
+   shft = true; 
+  }
+  digitalWrite(12, LOW);
+  
+  // Wire 7 @ PIN 16: fctn & lock
+  digitalWrite(16, HIGH); 
+  wire12.update();
+  wire6.update(); 
+  if(wire12.risingEdge()){
+   fctn = true; 
+  }  
+  if(wire6.risingEdge()){
+   lock = true; 
+  }
+  digitalWrite(16, LOW);
+ 
+   
+  // Wire 10 @ PIN 44: ctrl
+  digitalWrite(44, HIGH);
+  wire12.update();
+  if(wire12.risingEdge()){
+   ctrl = true; 
+  }
+  digitalWrite(44, LOW);
+}
 
 
