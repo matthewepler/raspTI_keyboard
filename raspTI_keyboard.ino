@@ -406,23 +406,58 @@ void loop(){
   wire13.update();
   wire12.update();  
   
+  // ----------------------- /
   if(wire8.risingEdge()){
+   if(shft == true){
+    Keyboard.print('-'); 
+   } else {
    Keyboard.print('/'); 
+   }
   }
+  
+  // ----------------------- N
   if(wire9.risingEdge()){
+   if(shft == true){
+    Keyboard.print('N'); 
+   } else {
    Keyboard.print('n'); 
+   }
   }
+  
+  // ----------------------- M
   if(wire15.risingEdge()){
+   if(shft == true){
+    Keyboard.print('M'); 
+   } else {
    Keyboard.print('m'); 
+   }
   }
+  
+  // ----------------------- ,
   if(wire14.risingEdge()){
+   if(shft == true){
+    Keyboard.print('<'); 
+   } else {
    Keyboard.print(','); 
+   }
   }
+  
+  // ----------------------- .
   if(wire13.risingEdge()){
+   if(shft == true){
+    Keyboard.print('>'); 
+   } else {
    Keyboard.print('.'); 
+   }
   }
+  
+  // ----------------------- =
   if(wire12.risingEdge()){
+   if(shft == true){
+    Keyboard.print('+'); 
+   } else {
    Keyboard.print('='); 
+   }
   }  
   digitalWrite(14, LOW);
 
