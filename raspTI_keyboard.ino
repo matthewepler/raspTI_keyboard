@@ -18,6 +18,8 @@ KEYMAP as found here: http://www.nouspikel.com/ti99/titechpages.htm
 #include <Bounce.h>
 const int bounceDelay = 90;
 
+char left = KEY_LEFT_ARROW;
+
 Bounce wire1  = Bounce(10, bounceDelay);
 Bounce wire3  = Bounce(12, bounceDelay);
 Bounce wire4  = Bounce(13, bounceDelay);
@@ -240,20 +242,96 @@ void loop(){
   wire14.update();
   wire13.update();
   
+  // ----------------------- A
   if(wire8.risingEdge()){
+   if(lock == true){ 
+    Keyboard.print('A'); 
+    lock = false;
+   } 
+   else if(shft == true){
+     Keyboard.print('A'); 
+     shft = false;
+   }
+   else if(fctn == true) {
+     Keyboard.print(':');
+     fctn = false;
+   } else {
    Keyboard.print('a'); 
+   }
   }
+  
+  // ----------------------- G
   if(wire9.risingEdge()){
+   if(lock == true){ 
+    Keyboard.print('G'); 
+    lock = false;
+   } 
+   else if(shft == true){
+     Keyboard.print('G'); 
+     shft = false;
+   }
+   else if(fctn == true) {
+     Keyboard.print('}');
+     fctn = false;
+   } else {
    Keyboard.print('g'); 
+   }
   }
+  
+  // ----------------------- F
   if(wire15.risingEdge()){
+   if(lock == true){ 
+    Keyboard.print('F'); 
+    lock = false;
+   } 
+   else if(shft == true){
+     Keyboard.print('F'); 
+     shft = false;
+   }
+   else if(fctn == true) {
+     Keyboard.print('{');
+     fctn = false;
+   } else {
    Keyboard.print('f'); 
+   }
   }
+  
+  // ----------------------- D
   if(wire14.risingEdge()){
+   if(lock == true){ 
+    Keyboard.print('D'); 
+    lock = false;
+   } 
+   else if(shft == true){
+     Keyboard.print('D'); 
+     shft = false;
+   }
+   else if(fctn == true) {
+     Keyboard.press(KEY_RIGHT_ARROW);
+     Keyboard.release(KEY_RIGHT_ARROW);
+     fctn = false;
+   } else {
    Keyboard.print('d'); 
+   }
   }
+  
+  // ----------------------- S
   if(wire13.risingEdge()){
+   if(lock == true){ 
+    Keyboard.print('S'); 
+    lock = false;
+   } 
+   else if(shft == true){
+     Keyboard.print('S'); 
+     shft = false;
+   }
+   else if(fctn == true) {
+     Keyboard.press(KEY_LEFT_ARROW);
+     Keyboard.release(KEY_LEFT_ARROW);
+     fctn = false;
+   } else {
    Keyboard.print('s'); 
+   }
   }
   digitalWrite(12, LOW);
   
