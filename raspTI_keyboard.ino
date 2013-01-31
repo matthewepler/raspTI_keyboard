@@ -349,6 +349,7 @@ void loop(){
   if(wire8.risingEdge()){
    if(shft == true){
     Keyboard.print(':'); 
+    shft = false;
    } else {
    Keyboard.print(';'); 
    }
@@ -358,6 +359,7 @@ void loop(){
   if(wire9.risingEdge()){
    if(shft == true){
     Keyboard.print('H'); 
+    shft = false;
    } else {
    Keyboard.print('h'); 
    }
@@ -367,6 +369,7 @@ void loop(){
   if(wire15.risingEdge()){
    if(shft == true){
     Keyboard.print('J'); 
+    shft = false;
    } else {
    Keyboard.print('j'); 
    }
@@ -376,6 +379,7 @@ void loop(){
   if(wire14.risingEdge()){
    if(shft == true){
     Keyboard.print('K'); 
+    shft = false;
    } else {
    Keyboard.print('k'); 
    }
@@ -384,7 +388,8 @@ void loop(){
   // ----------------------- L
   if(wire13.risingEdge()){
    if(shft == true){
-    Keyboard.print('L'); 
+    Keyboard.print('L');
+    shft = false; 
    } else {
    Keyboard.print('l'); 
    }
@@ -410,6 +415,7 @@ void loop(){
   if(wire8.risingEdge()){
    if(shft == true){
     Keyboard.print('-'); 
+    shft = false;
    } else {
    Keyboard.print('/'); 
    }
@@ -419,6 +425,7 @@ void loop(){
   if(wire9.risingEdge()){
    if(shft == true){
     Keyboard.print('N'); 
+    shft = false;
    } else {
    Keyboard.print('n'); 
    }
@@ -428,6 +435,7 @@ void loop(){
   if(wire15.risingEdge()){
    if(shft == true){
     Keyboard.print('M'); 
+    shft = false;
    } else {
    Keyboard.print('m'); 
    }
@@ -437,6 +445,7 @@ void loop(){
   if(wire14.risingEdge()){
    if(shft == true){
     Keyboard.print('<'); 
+    shft = false;
    } else {
    Keyboard.print(','); 
    }
@@ -446,6 +455,7 @@ void loop(){
   if(wire13.risingEdge()){
    if(shft == true){
     Keyboard.print('>'); 
+    shft = false;
    } else {
    Keyboard.print('.'); 
    }
@@ -455,6 +465,7 @@ void loop(){
   if(wire12.risingEdge()){
    if(shft == true){
     Keyboard.print('+'); 
+    shft = false;
    } else {
    Keyboard.print('='); 
    }
@@ -470,20 +481,54 @@ void loop(){
   wire14.update();
   wire13.update();
 
+  // ----------------------- 1
   if(wire8.risingEdge()){
+   if(shft == true){
+    Keyboard.print('!'); 
+    shft = false;
+   } else if(ctrl == true){
+    Keyboard.press(KEY_DELETE);
+    ctrl = false;
+    Keyboard.release(KEY_DELETE);
+   } else {
    Keyboard.print('1'); 
+   }
   }
+  
+  // ----------------------- 5
   if(wire9.risingEdge()){
+   if(shft == true){
+    Keyboard.print('%'); 
+   } else {
    Keyboard.print('5'); 
+   }
   } 
+  
+  // ----------------------- 4
   if(wire15.risingEdge()){
+   if(shft == true){
+    Keyboard.print('$'); 
+   } else {
    Keyboard.print('4'); 
+   }
   } 
+  
+  // ----------------------- 3
   if(wire14.risingEdge()){
+   if(shft == true){
+    Keyboard.print('#'); 
+   } else {
    Keyboard.print('3'); 
+   }
   }  
+  
+  // ----------------------- 2
   if(wire13.risingEdge()){
+   if(shft == true){
+    Keyboard.print('@'); 
+   } else {
    Keyboard.print('2'); 
+   }
   }
   digitalWrite(16, LOW);
 
@@ -581,5 +626,19 @@ void checkModifiers(){
   }
   digitalWrite(44, LOW);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
