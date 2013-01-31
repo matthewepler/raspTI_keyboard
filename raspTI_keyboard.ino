@@ -16,22 +16,22 @@ KEYMAP as found here: http://www.nouspikel.com/ti99/titechpages.htm
  */
 
 #include <Bounce.h>
+const int bounceDelay = 90;
 
-Bounce wire1  = Bounce(10, 90);
-Bounce wire2  = Bounce(11, 90);
-Bounce wire3  = Bounce(12, 90);
-Bounce wire4  = Bounce(13, 90);
-Bounce wire5  = Bounce(14, 90);
-Bounce wire6  = Bounce(15, 90);
-Bounce wire7  = Bounce(16, 90);
-Bounce wire8  = Bounce(17, 90);
-Bounce wire9  = Bounce(45, 90);
-Bounce wire10 = Bounce(44, 90);
-Bounce wire11 = Bounce(43, 90);
-Bounce wire12 = Bounce(42, 90);
-Bounce wire13 = Bounce(41, 90);
-Bounce wire14 = Bounce(40, 90);
-Bounce wire15 = Bounce(39, 90);
+Bounce wire1  = Bounce(10, bounceDelay);
+Bounce wire3  = Bounce(12, bounceDelay);
+Bounce wire4  = Bounce(13, bounceDelay);
+Bounce wire5  = Bounce(14, bounceDelay);
+Bounce wire6  = Bounce(15, bounceDelay);
+Bounce wire7  = Bounce(16, bounceDelay);
+Bounce wire8  = Bounce(17, bounceDelay);
+Bounce wire9  = Bounce(45, bounceDelay);
+Bounce wire10 = Bounce(44, bounceDelay);
+Bounce wire11 = Bounce(43, bounceDelay);
+Bounce wire12 = Bounce(42, bounceDelay);
+Bounce wire13 = Bounce(41, bounceDelay);
+Bounce wire14 = Bounce(40, bounceDelay);
+Bounce wire15 = Bounce(39, bounceDelay);
 
 boolean fctn;
 boolean shft;
@@ -40,6 +40,7 @@ boolean lock;
 
 
 void setup(){
+  Serial.begin(9600);
   pinMode(10, OUTPUT);  // 1 
   pinMode(11, OUTPUT);  // 2
   pinMode(12, OUTPUT);  // 3
@@ -67,7 +68,6 @@ void loop(){
   
   // ------------------------ Wire 1 @ PIN 10
   digitalWrite(10, HIGH); 
-  
   wire8.update();
   wire9.update();
   wire15.update();
@@ -75,6 +75,7 @@ void loop(){
   wire13.update();
   wire12.update(); 
   
+  // ----------------------- P
   if(wire8.risingEdge()){
    if(lock == true){ 
     Keyboard.print('P'); 
@@ -84,14 +85,15 @@ void loop(){
      Keyboard.print('P'); 
      shft = false;
    }
-   else if(ctrl == true) {
+   else if(fctn == true) {
      Keyboard.print('"');
-     ctrl = false;
+     fctn = false;
    } else {
    Keyboard.print('p'); 
    } 
   }
   
+  // ----------------------- Y
   if(wire9.risingEdge()){
    if(lock == true){ 
     Keyboard.print('Y'); 
@@ -106,24 +108,70 @@ void loop(){
    }
   }
   
+  // ----------------------- U
   if(wire15.risingEdge()){
+   if(lock == true){ 
+    Keyboard.print('U'); 
+    lock = false;
+   } 
+   else if(shft == true){
+     Keyboard.print('U'); 
+     shft = false;
+   }
+   else if(fctn == true) {
+     Keyboard.print('_');
+     fctn = false;
+   } 
+   else {
    Keyboard.print('u'); 
+   }
   }
+  
+  // ----------------------- I
   if(wire14.risingEdge()){
+   if(lock == true){ 
+    Keyboard.print('I'); 
+    lock = false;
+   } 
+   else if(shft == true){
+     Keyboard.print('I'); 
+     shft = false;
+   }
+   else if(fctn == true) {
+     Keyboard.print('?');
+     fctn = false;
+   } else {
    Keyboard.print('i'); 
-  }
+   } 
+  } 
+  
+  // ----------------------- O
   if(wire13.risingEdge()){
+   if(lock == true){ 
+    Keyboard.print('O'); 
+    lock = false;
+   } 
+   else if(shft == true){
+     Keyboard.print('O'); 
+     shft = false;
+   }
+   else if(fctn == true) {
+     Keyboard.print('\'');
+     fctn = false;
+   } else {
    Keyboard.print('o'); 
+   }
   }
+  
+  // ----------------------- ENTER
   if(wire12.risingEdge()){
    Keyboard.print('\n'); 
   }  
   digitalWrite(10, LOW);
   
 
-  // ------------------------ Wire 2 @ PIN 11
+  // -------------------------- Wire 2 @ PIN 11
   digitalWrite(11, HIGH); 
-  
   wire6.update();
   wire8.update();
   wire9.update();
@@ -145,14 +193,12 @@ void loop(){
   }
   if(wire13.risingEdge()){
    Keyboard.print('9'); 
-  }
-  
+  } 
   digitalWrite(11, LOW);
 
 
   // ------------------------ Wire 3 @ PIN 12
   digitalWrite(12, HIGH); 
-  
   wire6.update();
   wire8.update();
   wire9.update();
@@ -175,13 +221,11 @@ void loop(){
   if(wire13.risingEdge()){
    Keyboard.print('s'); 
   }
-  
   digitalWrite(12, LOW);
   
   
   // ------------------------ Wire 4 @ PIN 13
   digitalWrite(13, HIGH); 
-  
   wire8.update();
   wire9.update();
   wire15.update();
@@ -207,13 +251,11 @@ void loop(){
   if(wire12.risingEdge()){
    Keyboard.print(' '); 
   }  
-  
   digitalWrite(13, LOW);
 
   
   // ------------------------ Wire 5 @ PIN 14
   digitalWrite(14, HIGH); 
-  
   wire8.update();
   wire9.update();
   wire15.update();
@@ -239,13 +281,11 @@ void loop(){
   if(wire12.risingEdge()){
    Keyboard.print('='); 
   }  
-  
   digitalWrite(14, LOW);
 
   
   // ------------------------ Wire 7 @ PIN 16
   digitalWrite(16, HIGH); 
-  
   wire8.update();
   wire9.update();
   wire15.update();
@@ -266,14 +306,12 @@ void loop(){
   }  
   if(wire13.risingEdge()){
    Keyboard.print('2'); 
-  }  
-
+  }
   digitalWrite(16, LOW);
 
   
   // ------------------------ Wire 10 @ PIN 44
   digitalWrite(44, HIGH); 
-  
   wire8.update();
   wire9.update();
   wire15.update();
@@ -295,13 +333,11 @@ void loop(){
   if(wire13.risingEdge()){
    Keyboard.print('w'); 
   } 
-  
   digitalWrite(44, LOW);
- 
+
   
   // ------------------------ Wire 11 @ PIN 43
   digitalWrite(43, HIGH); 
-
   wire8.update();
   wire9.update();
   wire15.update();
@@ -323,52 +359,46 @@ void loop(){
   if(wire13.risingEdge()){
    Keyboard.print('x'); 
   } 
-
   digitalWrite(43, LOW);
-  
 }
 
 
-//------------------------  MODIFIER KEYS: fctn, ctrl, shft, lock
+//--------------------------  MODIFIER KEYS
 void checkModifiers(){ 
   
-    // Wire 3 @ PIN 12: shft
+  // ------------------------ Wire 3 @ PIN 12: shft
   digitalWrite(12, HIGH);
   wire12.update();
-  if(wire12.risingEdge()){
+  if(digitalRead(42) == 1){
    shft = true; 
-  }
-  if(wire12.fallingEdge()){
+  } else {
    shft = false; 
   }
   digitalWrite(12, LOW);
   
-  // Wire 7 @ PIN 16: fctn & lock
+  // ------------------------ Wire 7 @ PIN 16: fctn & lock
   digitalWrite(16, HIGH); 
   wire12.update();
   wire6.update(); 
-  if(wire12.risingEdge()){
+  if(digitalRead(42) == 1){
    fctn = true; 
-  }  
-  if(wire12.fallingEdge()){
+  } else {
    fctn = false; 
   }
-  if(wire6.risingEdge()){
+  if(digitalRead(15) == 1){
    lock = true; 
-  }
-  if(wire6.fallingEdge()){
+  } else {
    lock = false; 
   }
   digitalWrite(16, LOW);
  
    
-  // Wire 10 @ PIN 44: ctrl
+  // ------------------------ Wire 10 @ PIN 44: ctrl
   digitalWrite(44, HIGH);
   wire12.update();
-  if(wire12.risingEdge()){
+  if(digitalRead(42) == 1){
    ctrl = true; 
-  }
-  if(wire12.fallingEdge()){
+  } else {
    ctrl = false; 
   }
   digitalWrite(44, LOW);
