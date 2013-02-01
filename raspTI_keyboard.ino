@@ -66,6 +66,7 @@ void loop(){
   // Check all INPUT pins (column in matrix diagram abobve) for a signal.
   // If a signal is detected, write the character (@ the intersection of the row/column).
 
+  // check for SHIFT, CTRL, FCTN, and/or ALPHA LOCK
   checkModifiers();
   
   // ------------------------ Wire 1 @ PIN 10
@@ -308,8 +309,8 @@ void loop(){
    }
    else if(fctn == true) {
      Keyboard.press(KEY_RIGHT_ARROW);
-     Keyboard.release(KEY_RIGHT_ARROW);
      fctn = false;
+     Keyboard.release(KEY_RIGHT_ARROW);
    } else {
    Keyboard.print('d'); 
    }
@@ -327,8 +328,8 @@ void loop(){
    }
    else if(fctn == true) {
      Keyboard.press(KEY_LEFT_ARROW);
-     Keyboard.release(KEY_LEFT_ARROW);
      fctn = false;
+     Keyboard.release(KEY_LEFT_ARROW);
    } else {
    Keyboard.print('s'); 
    }
@@ -350,48 +351,69 @@ void loop(){
    if(shft == true){
     Keyboard.print(':'); 
     shft = false;
-   } else {
-   Keyboard.print(';'); 
+   } 
+   else {
+    Keyboard.print(';'); 
    }
   }
   
   // ----------------------- H
   if(wire9.risingEdge()){
-   if(shft == true){
+   if(lock == true){
     Keyboard.print('H'); 
+    lock = false;
+   } 
+   else if(shft == true){
+    Keyboard.print('H');
     shft = false;
-   } else {
-   Keyboard.print('h'); 
+   } 
+   else {
+    Keyboard.print('h'); 
    }
   }
   
   // ----------------------- J
   if(wire15.risingEdge()){
-   if(shft == true){
+    if(lock == true){
+    Keyboard.print('J'); 
+    lock = false;
+   } 
+   else if(shft == true){
     Keyboard.print('J'); 
     shft = false;
-   } else {
-   Keyboard.print('j'); 
+   } 
+   else {
+    Keyboard.print('j'); 
    }
   }
   
   // ----------------------- K
   if(wire14.risingEdge()){
-   if(shft == true){
+   if(lock == true){
     Keyboard.print('K'); 
+    lock = false;
+   } 
+   else if(shft == true) {
+    Keyboard.print('K');
     shft = false;
-   } else {
-   Keyboard.print('k'); 
+   } 
+   else {
+    Keyboard.print('k'); 
    }
   }
   
   // ----------------------- L
   if(wire13.risingEdge()){
-   if(shft == true){
+   if(lock == true){
     Keyboard.print('L');
-    shft = false; 
-   } else {
-   Keyboard.print('l'); 
+    lock = false; 
+   } 
+   else if(shft == true){
+    Keyboard.print('L');
+    shft = false;
+   } 
+   else {
+    Keyboard.print('l'); 
    }
   }
   
@@ -416,28 +438,37 @@ void loop(){
    if(shft == true){
     Keyboard.print('-'); 
     shft = false;
-   } else {
-   Keyboard.print('/'); 
+   } 
+   else {
+    Keyboard.print('/'); 
    }
   }
   
   // ----------------------- N
   if(wire9.risingEdge()){
-   if(shft == true){
+   if(lock == true){
     Keyboard.print('N'); 
-    shft = false;
-   } else {
-   Keyboard.print('n'); 
+    lock = false;
+   } 
+   else if(shft == true){
+    Keyboard.print('N'); 
+   }
+   else {
+    Keyboard.print('n'); 
    }
   }
   
   // ----------------------- M
   if(wire15.risingEdge()){
-   if(shft == true){
+   if(lock == true){
     Keyboard.print('M'); 
-    shft = false;
-   } else {
-   Keyboard.print('m'); 
+    lock = false;
+   } 
+   else if(shft == true){
+    Keyboard.print('M'); 
+   }
+   else {
+    Keyboard.print('m'); 
    }
   }
   
@@ -486,12 +517,14 @@ void loop(){
    if(shft == true){
     Keyboard.print('!'); 
     shft = false;
-   } else if(ctrl == true){
+   } 
+   else if(ctrl == true){
     Keyboard.press(KEY_DELETE);
     ctrl = false;
     Keyboard.release(KEY_DELETE);
-   } else {
-   Keyboard.print('1'); 
+   } 
+   else {
+    Keyboard.print('1'); 
    }
   }
   
@@ -499,8 +532,9 @@ void loop(){
   if(wire9.risingEdge()){
    if(shft == true){
     Keyboard.print('%'); 
-   } else {
-   Keyboard.print('5'); 
+   } 
+   else {
+    Keyboard.print('5'); 
    }
   } 
   
@@ -508,8 +542,9 @@ void loop(){
   if(wire15.risingEdge()){
    if(shft == true){
     Keyboard.print('$'); 
-   } else {
-   Keyboard.print('4'); 
+   } 
+   else {
+    Keyboard.print('4'); 
    }
   } 
   
@@ -517,8 +552,9 @@ void loop(){
   if(wire14.risingEdge()){
    if(shft == true){
     Keyboard.print('#'); 
-   } else {
-   Keyboard.print('3'); 
+   } 
+   else {
+    Keyboard.print('3'); 
    }
   }  
   
@@ -526,8 +562,9 @@ void loop(){
   if(wire13.risingEdge()){
    if(shft == true){
     Keyboard.print('@'); 
-   } else {
-   Keyboard.print('2'); 
+   } 
+   else {
+    Keyboard.print('2'); 
    }
   }
   digitalWrite(16, LOW);
@@ -541,20 +578,96 @@ void loop(){
   wire14.update();
   wire13.update();
   
+  // ----------------------- Q
   if(wire8.risingEdge()){
-   Keyboard.print('q'); 
+   if(lock == true){
+    Keyboard.print('Q'); 
+    lock = false;
+   } 
+   else if(shft == true){
+    Keyboard.print('Q');
+   shft = false; 
+   }
+   else {
+    Keyboard.print('q'); 
+   }
   } 
+  
+  // ----------------------- T
   if(wire9.risingEdge()){
-   Keyboard.print('t'); 
+   if(lock == true){
+    Keyboard.print('T'); 
+    lock = false;
+   } 
+   else if(shft == true){
+    Keyboard.print('T');
+    shft = false; 
+   }
+   else if(fctn == true){
+     Keyboard.print(']');
+     fctn = false;
+   }
+   else {
+    Keyboard.print('t'); 
+   }
   }  
+  
+  // ----------------------- R
   if(wire15.risingEdge()){
-   Keyboard.print('r'); 
+   if(lock == true){
+    Keyboard.print('R'); 
+    lock = false;
+   } 
+   else if(shft == true){
+    Keyboard.print('R');
+    shft = false; 
+   }
+   else if(fctn == true){
+     Keyboard.print('[');
+     fctn = false;
+   }
+   else {
+    Keyboard.print('r'); 
+   }
   }  
+  
+  // ----------------------- E
   if(wire14.risingEdge()){
-   Keyboard.print('e'); 
+   if(lock == true){
+    Keyboard.print('E'); 
+    lock = false;
+   } 
+   else if(shft == true){
+    Keyboard.print('E');
+    shft = false; 
+   }
+   else if(fctn == true){
+     Keyboard.press(KEY_UP_ARROW);
+     fctn = false;
+     Keyboard.release(KEY_UP_ARROW);
+   }
+   else {
+    Keyboard.print('e'); 
+   }
   } 
+  
+  // ----------------------- W
   if(wire13.risingEdge()){
-   Keyboard.print('w'); 
+   if(lock == true){
+    Keyboard.print('W'); 
+    lock = false;
+   } 
+   else if(shft == true){
+    Keyboard.print('W');
+    shft = false; 
+   }
+   else if(fctn == true){
+     Keyboard.print('~');
+     fctn = false;
+   }
+   else {
+    Keyboard.print('w'); 
+   }
   } 
   digitalWrite(44, LOW);
 
@@ -567,26 +680,101 @@ void loop(){
   wire14.update();
   wire13.update();
   
+  // ----------------------- Z
   if(wire8.risingEdge()){
-   Keyboard.print('z'); 
+   if(lock == true){
+    Keyboard.print('Z'); 
+    lock = false;
+   } 
+   else if(shft == true){
+    Keyboard.print('Z');
+    shft = false; 
+   }
+   else if(fctn == true){
+     Keyboard.print('\\');
+     fctn = false;
+   }
+   else {
+    Keyboard.print('z'); 
+   }
   } 
+  
+  // ----------------------- B
   if(wire9.risingEdge()){
-   Keyboard.print('b'); 
+   if(lock == true){
+    Keyboard.print('B'); 
+    lock = false;
+   } 
+   else if(shft == true){
+    Keyboard.print('B');
+    shft = false; 
+   }
+   else {
+    Keyboard.print('b'); 
+   }
   } 
+  
+  // ----------------------- V
   if(wire15.risingEdge()){
-   Keyboard.print('v'); 
+   if(lock == true){
+    Keyboard.print('V'); 
+    lock = false;
+   } 
+   else if(shft == true){
+    Keyboard.print('V');
+    shft = false; 
+   }
+   else {
+    Keyboard.print('v'); 
+   }
   } 
+  
+  // ----------------------- C
   if(wire14.risingEdge()){
-   Keyboard.print('c'); 
+   if(lock == true){
+    Keyboard.print('C'); 
+    lock = false;
+   } 
+   else if(shft == true){
+    Keyboard.print('C');
+    shft = false; 
+   }
+   else if(fctn == true){
+    Keyboard.print('`');
+    fctn = false; 
+   }
+   else {
+    Keyboard.print('c'); 
+   }
   } 
+  
+  // ----------------------- X
   if(wire13.risingEdge()){
-   Keyboard.print('x'); 
+   if(lock == true){
+    Keyboard.print('X'); 
+    lock = false;
+   } 
+   else if(shft == true){
+    Keyboard.print('X');
+    shft = false; 
+   }
+   else if(fctn == true){
+    Keyboard.press(KEY_DOWN_ARROW);
+     fctn = false;
+     Keyboard.release(KEY_DOWN_ARROW);
+   }
+   else {
+    Keyboard.print('x'); 
+   }
   } 
   digitalWrite(43, LOW);
 }
 
 
-//--------------------------  MODIFIER KEYS
+
+
+
+//------------------------------------------------  MODIFIER KEYS
 void checkModifiers(){ 
   
   // ------------------------ Wire 3 @ PIN 12: shft
