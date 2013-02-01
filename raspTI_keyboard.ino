@@ -18,8 +18,6 @@ KEYMAP as found here: http://www.nouspikel.com/ti99/titechpages.htm
 #include <Bounce.h>
 const int bounceDelay = 90;
 
-char left = KEY_LEFT_ARROW;
-
 Bounce wire1  = Bounce(10, bounceDelay);
 Bounce wire3  = Bounce(12, bounceDelay);
 Bounce wire4  = Bounce(13, bounceDelay);
@@ -42,7 +40,6 @@ boolean lock;
 
 
 void setup(){
-  Serial.begin(9600);
   pinMode(10, OUTPUT);  // 1 
   pinMode(11, OUTPUT);  // 2
   pinMode(12, OUTPUT);  // 3
@@ -519,9 +516,9 @@ void loop(){
     shft = false;
    } 
    else if(ctrl == true){
-    Keyboard.press(KEY_DELETE);
+    Keyboard.press(KEY_BACKSPACE);
     ctrl = false;
-    Keyboard.release(KEY_DELETE);
+    Keyboard.release(KEY_BACKSPACE);
    } 
    else {
     Keyboard.print('1'); 
